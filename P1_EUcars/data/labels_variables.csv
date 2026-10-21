@@ -1,0 +1,51 @@
+variable,label
+ye,year (=first dimension of panel)
+ma,market (=second dimension of panel)
+co,model code (=third dimension of panel)
+zcode,alternative model code (predecessors and successors get same number)
+brd,brand code
+type,name of brand and model
+brand,name of brand
+model,name of model
+org,"origin code (demand side, country with which consumers associate model)"
+loc,"location code (production side, country where producer produce model)"
+cla,class or segment code
+home,domestic car dummy (appropriate interaction of org and ma)
+frm,firm code
+qu,sales (number of new car registrations)
+cy,cylinder volume or displacement (in cc)
+hp,horsepower (in kW)
+we,weight (in kg)
+pl,"places (number, not reliable variable)"
+do,"doors (number, not reliable variable)"
+le,length (in cm)
+wi,width (in cm)
+he,height (in cm)
+li1,"measure 1 for fuel efficiency (liter per km, at 90 km/h)"
+li2,"measure 2 for fuel efficiency (liter per km, at 120 km/h)"
+li3,"measure 3 for fuel efficiency (liter per km, at city speed)"
+li,"average of li1, li2, li3 (used in papers)"
+sp,maximum speed (km/hour)
+ac,"time to acceleration (in seconds from 0 to 100 km/h, some from 0 to 96 km/h)"
+pr,price (in destination currency including V.A.T.)
+princ,=pr/(ngdp/pop): price relative to per capita income (often used in demand model)
+eurpr,=pr/avdexr: price in common currency (in SDR times 1.2956 to interpret in Euros)
+exppr,=pr/avexr: price in exporter currency
+avexr,av. exchange rate of exporter country (exporter 'loc' currency per SDR)
+avdexr,av. exchange rate of destination country (destination 'ma' currency per SDR)
+avcpr,av. consumer price index of exporter country
+avppr,av. producer price index of exporter country
+avdcpr,av. consumer price index of destination country
+avdppr,av. producer price index of destination country
+xexr,avdexr/avexr
+tax,percentage VAT
+pop,population
+ngdp,nominal gross domestic product of destination country (destination currency)
+rgdp,real gross domestic product
+engdp,=ngdp/avdexr: nominal gdp in common currency (SDR)
+ergdp,=rgdp/avexr
+engdpc,=engdp/pop: nominal gdp per capita in common currency
+ergdpc,=ergdp/pop
+s,market share (qu / qu_tot)
+qu_tot,total sales in this market-year
+inc,avg. income per capita

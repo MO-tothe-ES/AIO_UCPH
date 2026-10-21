@@ -1,0 +1,5 @@
+Model,Every-market welfare neutrality (%)
+Logit OLS,27.87047867332281
+Logit IV,1.9629863961075942
+Nested OLS,21.733220584457783
+Nested IV,1.8953934827811314

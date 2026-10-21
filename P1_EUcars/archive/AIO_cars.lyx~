@@ -1,0 +1,2629 @@
+#LyX 2.5 created this file. For more info see https://www.lyx.org/
+\lyxformat 643
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+% Assignment details
+\newcommand{\assignmenttitle}{The European Car Market}
+\newcommand{\assignmentnumber}{Project 1}
+\newcommand{\coursename}{Advanced Industrial Organisation}
+\newcommand{\studentname}{Casper Moes}
+\newcommand{\studentid}{hwd362}
+\newcommand{\submissiondate}{21. October 2026}
+
+% Layout and typography
+\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools,amssymb}
+\usepackage{amsthm}
+\usepackage{mathpazo} % Palatino text and matching mathematics
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
+% Theorems and proofs (English labels, regardless of document language)
+\newtheorem{theorem}{Theorem}[section]
+\AddToHook{env/proof/begin}{\renewcommand{\proofname}{Proof}}
+
+\usepackage{setspace}
+\onehalfspacing
+\raggedbottom
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+
+% Lists and equations
+\usepackage{enumitem}
+\setlist{leftmargin=*,itemsep=0.15em,topsep=0.3em,parsep=0pt}
+\numberwithin{equation}{section}
+
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\R}{\mathbb{R}}
+
+% Optional emphasis for a main result
+\newenvironment{keyresult}
+  {\par\addvspace{0.5em}\noindent\textbf{Key result.}\enspace\ignorespaces}
+  {\par\addvspace{0.5em}\ignorespacesafterend}
+
+% Page numbers and links
+\pagestyle{plain}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+\hypersetup{
+  pdftitle={\assignmenttitle},
+  pdfauthor={\studentname},
+  pdfsubject={\coursename\space--\space\assignmentnumber}
+}
+\urlstyle{same}
+
+% Compact automatic title
+\AtBeginDocument{%
+  \begingroup
+    \setstretch{1}
+    \setlength{\parskip}{0pt}
+    \raggedright
+    {\small\coursename\enspace/\enspace\assignmentnumber\par}
+    \vspace{0.6em}
+    {\LARGE\bfseries\assignmenttitle\par}
+    \vspace{0.6em}
+    {\small\studentname\enspace(\studentid)\hfill\submissiondate\par}
+    \vspace{1.5em}
+  \endgroup
+}
+
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+\definecolor{algorithmteal}{HTML}{3C7274}
+
+\SetAlCapFnt{\bfseries\color{algorithmteal}}
+\SetAlCapNameFnt{\bfseries\color{algorithmteal}}
+
+\SetKwInput{KwInit}{Initialise}
+\SetKw{Return}{return}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children no
+\language american
+\language_package default
+\inputencoding utf8
+\fontencoding auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification default
+\crossref_package refstyle
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\backgroundcolor none
+\fontcolor none
+\notefontcolor lightgray
+\boxbgcolor red
+\table_border_color default
+\table_odd_row_color default
+\table_even_row_color default
+\table_alt_row_colors_start 1
+\index Index
+\shortcut idx
+\color #008080
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content true
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\docbook_mathml_version 0
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+newpage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Empirical part
+\end_layout
+
+\begin_layout Subsection
+Demand estimation
+\end_layout
+
+\begin_layout Subsubsection
+Simple logit
+\end_layout
+
+\begin_layout Standard
+In the simple logit model utility of good 
+\begin_inset Formula $j$
+\end_inset
+
+ in market 
+\begin_inset Formula $t$
+\end_inset
+
+ for person / household 
+\begin_inset Formula $i$
+\end_inset
+
+ is given by 
+\begin_inset Formula 
+\begin{equation}
+u_{ijt}=\underbrace{\mathbf{x}^{\top}_{jt}\boldsymbol{\beta}-\alpha p_{jt}+\zeta_{jt}}_{\equiv\delta_{jt}}+\epsilon_{ijt},\quad\epsilon_{ijt}\overset{iid}{\sim}T1EV(0),\label{eq:sl}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\delta_{jt}$
+\end_inset
+
+ is the deterministic mean utility of good 
+\begin_inset Formula $j$
+\end_inset
+
+ in market 
+\begin_inset Formula $t$
+\end_inset
+
+ (from now on the relevant market 
+\begin_inset Formula $t$
+\end_inset
+
+ will only be stated when it is ambiguous).
+ Model 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:sl}
+\end_layout
+
+\end_inset
+
+ gives rise to the following conditional choice probabilities (CCP)
+\begin_inset Formula 
+\begin{equation}
+s_{jt}=\mathbb{P}\left(u_{ijt}\geq\max_{k\neq j}\left\{ u_{ijt}\right\} \right)=\frac{\exp\left(\delta_{jt}\right)}{1+\sum_{k\in\mathcal{J}_{t}}\exp\left(\delta_{kt}\right)},\label{eq:ccp_sl}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathcal{J}_{t}=\{1,2,\dots,J\}$
+\end_inset
+
+ contain all 
+\begin_inset Formula $J$
+\end_inset
+
+ products in market 
+\begin_inset Formula $t$
+\end_inset
+
+ (and not the outside option).
+ Note that the observed market share is defined as the exact CCP.
+ From 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:ccp_sl}
+\end_layout
+
+\end_inset
+
+ the mean utility of good 
+\begin_inset Formula $j$
+\end_inset
+
+ relative to the outside option is derived as 
+\begin_inset Formula $\hat{\delta}_{jt}=\log\left(s_{jt}\right)-\log\left(s_{0t}\right)$
+\end_inset
+
+,
+ where the utility from the outside option is normalized to zero (i.e.
+ 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+).
+ This motivates the following regression model
+\begin_inset Formula 
+\begin{equation}
+\log\left(s_{jt}\right)-\log\left(s_{0t}\right)=\mathbf{x}^{\top}_{jt}\boldsymbol{\beta}-\alpha p_{jt}+\xi_{jt},\label{eq:reg_sl}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\xi_{jt}$
+\end_inset
+
+ is the error term.
+ I estimate 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:reg_sl}
+\end_layout
+
+\end_inset
+
+ with OLS and heteroscedastic robust standard errors.
+ The controls in 
+\begin_inset Formula $\mathbf{x}_{jt}$
+\end_inset
+
+ are weight (in tonnes),
+ fuel efficiency (average of liter per kilometer at 90,
+ 120 km/h and city speed),
+ brand fixed effects (i.e.
+ ford,
+ fiat,
+ and so on),
+ a home-product dummy and market fixed effects.
+ Thus the identifying price variation is found inside each market and brand.
+ 
+\end_layout
+
+\begin_layout Standard
+For example 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ is partly identified by price and demand variation between VW models in France in 1980 conditional on observed characteristics 
+\begin_inset Formula $\mathbf{x}_{jt}$
+\end_inset
+
+ and not by the price and demand variation between France in 1980 and France in 1981 or between VW models and Fiat models.
+ This removes possible endogenous correlation between prices and market shocks and brand shocks.
+\end_layout
+
+\begin_layout Subsubsection
+Random Coefficients model
+\end_layout
+
+\begin_layout Standard
+The simple logit estimation has two major problems.
+ Firstly the IIA assumption is not a meaningful representation of real world demand patterns and thus tarnishes the merging simulation.
+ One way to break IIA is to instroduce heterogeneity in utility coefficients.
+ Specifically let price sensitivity differ randomly among households according to a log normal distribution:
+ 
+\begin_inset Formula $\alpha_{i}\sim\exp\left\{ \mu+\sigma\nu_{i}\right\} ,$
+\end_inset
+
+ where 
+\begin_inset Formula $\nu_{i}\overset{iid}{\sim}\mathcal{N}(0,1)$
+\end_inset
+
+.
+ This implies the following market shares
+\begin_inset Formula 
+\[
+s_{jt}(\boldsymbol{\delta}_{jt},\mu,\sigma)=\mathbb{E}_{\alpha_{i}}\left[s_{ijt}(\alpha_{i})\right]=\int\underbrace{\frac{\exp\left(\mathbf{x}^{\top}_{jt}\boldsymbol{\beta}-\alpha_{i}p_{jt}+\zeta_{jt}\right)}{1+\sum_{k\in\mathcal{J}_{t}}\exp\left(\mathbf{x}^{\top}_{jt}\boldsymbol{\beta}-\alpha_{i}p_{jt}+\zeta_{jt}\right)}}_{\text{CCP of household }i}\:dF(\alpha_{i};\mu,\sigma).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is estimated using the following GMM algorithm where i set 
+\begin_inset Formula $W=I$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{algorithm}[htbp]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+DontPrintSemicolon
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{BLP demand estimation by two-step GMM}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{alg:blp}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+KwData{Market shares,
+ prices,
+ car characteristics and instruments.}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Estimate $(
+\backslash
+mu,
+\backslash
+sigma)$ using PyBLP's two-step GMM routine
+\end_layout
+
+\begin_layout Plain Layout
+with the L-BFGS-B minimiser.
+ At each trial value:
+\backslash
+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+ForEach{trial $(
+\backslash
+mu,
+\backslash
+sigma)$}{
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+textbf{Calculate predicted shares:}
+\end_layout
+
+\begin_layout Plain Layout
+    approximate the consumer integral using
+\end_layout
+
+\begin_layout Plain Layout
+    40-point Gaussian quadrature.
+\backslash
+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+textbf{Invert demand:}
+\end_layout
+
+\begin_layout Plain Layout
+    find product utilities reproducing observed shares,
+\end_layout
+
+\begin_layout Plain Layout
+    using SQUAREM acceleration of
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+        a_{jt}^{(m+1)}
+\end_layout
+
+\begin_layout Plain Layout
+        =
+\end_layout
+
+\begin_layout Plain Layout
+        a_{jt}^{(m)}
+\end_layout
+
+\begin_layout Plain Layout
+        + 
+\backslash
+log s_{jt}^{
+\backslash
+mathrm{obs}}
+\end_layout
+
+\begin_layout Plain Layout
+        - 
+\backslash
+log 
+\backslash
+widehat s_{jt}
+\end_layout
+
+\begin_layout Plain Layout
+            
+\backslash
+bigl(a^{(m)};
+\backslash
+mu,
+\backslash
+sigma
+\backslash
+bigr).
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+textbf{Estimate linear coefficients:}
+\end_layout
+
+\begin_layout Plain Layout
+    estimate the characteristic coefficients and
+\end_layout
+
+\begin_layout Plain Layout
+    fixed effects by linear GMM,
+ conditional on
+\end_layout
+
+\begin_layout Plain Layout
+    $(
+\backslash
+mu,
+\backslash
+sigma)$.
+\backslash
+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+textbf{Recover demand residuals:}
+\end_layout
+
+\begin_layout Plain Layout
+    subtract fitted characteristics and fixed effects
+\end_layout
+
+\begin_layout Plain Layout
+    from the inverted product utilities.
+\backslash
+;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+    
+\backslash
+textbf{Evaluate the GMM criterion:}
+\end_layout
+
+\begin_layout Plain Layout
+    assess the instrument--residual correlations
+\end_layout
+
+\begin_layout Plain Layout
+    and let L-BFGS-B select the next trial values.
+\backslash
+;
+\end_layout
+
+\begin_layout Plain Layout
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+Return{The demand parameters minimising the GMM criterion.}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{algorithm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The second major problem i set out to tackle is price endogeneity.
+ This is generally suspected with OLS estimation since unobserved quality can correlate positively with both market share and price (conditional on regressors) and thus breaking the exogeneity assumption.
+ Therefore I introduce instrument variables for prices denoted 
+\begin_inset Formula $z_{jt}$
+\end_inset
+
+.
+ The identifying assumptions are 
+\emph on
+orthogonality
+\emph default
+ (i.e.
+ 
+\begin_inset Formula $\mathbb{E}\left[z_{jt}\xi_{jt}\right]=0$
+\end_inset
+
+) and 
+\emph on
+relevance
+\emph default
+ (i.e.
+ 
+\begin_inset Formula $Cov(p_{jt},z_{jt}\mid\mathbf{x}_{jt})\neq0$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Estimation results
+\end_layout
+
+\begin_layout Standard
+The results are displayed in table 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{tab:demand_results}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+begin{table}[htbp]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+centering
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+small
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+caption{Demand estimates with level prices}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+label{tab:demand_results}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{tabular*}{
+\backslash
+textwidth}{@{
+\backslash
+extracolsep{
+\backslash
+fill}}lccc@{}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+toprule
+\end_layout
+
+\begin_layout Plain Layout
+ & OLS logit & IV logit & Demand-only BLP 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Mean price sensitivity
+\end_layout
+
+\begin_layout Plain Layout
+    & 1.108 & 2.822 & 4.689 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.179) & (0.645) & (4.597) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Lognormal location,
+ $
+\backslash
+mu$
+\end_layout
+
+\begin_layout Plain Layout
+    & --- & --- & 1.511 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & & & (0.905) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Lognormal dispersion,
+ $
+\backslash
+sigma$
+\end_layout
+
+\begin_layout Plain Layout
+    & --- & --- & 0.260 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & & & (0.303) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Weight
+\end_layout
+
+\begin_layout Plain Layout
+    & -0.025 & 1.505 & 2.143 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.313) & (0.584) & (1.279) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Fuel consumption
+\end_layout
+
+\begin_layout Plain Layout
+    & -0.026 & -0.028 & -0.039 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.022) & (0.025) & (0.026) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Home-market indicator
+\end_layout
+
+\begin_layout Plain Layout
+    & 1.222 & 1.211 & 1.226 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.049) & (0.048) & (0.048) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Power-to-weight measure
+\end_layout
+
+\begin_layout Plain Layout
+    & -0.619 & 0.564 & 1.047 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.277) & (0.521) & (1.071) 
+\backslash
+
+\backslash
+[3pt]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Size
+\end_layout
+
+\begin_layout Plain Layout
+    & 0.090 & 0.104 & 0.170 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+    & (0.062) & (0.065) & (0.122) 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+midrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Market fixed effects
+\end_layout
+
+\begin_layout Plain Layout
+    & Yes & Yes & Yes 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Brand fixed effects
+\end_layout
+
+\begin_layout Plain Layout
+    & Yes & Yes & Yes 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Excluded demand instruments
+\end_layout
+
+\begin_layout Plain Layout
+    & 0 & 4 & 4 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Observations
+\end_layout
+
+\begin_layout Plain Layout
+    & 6,000 & 6,000 & 6,000 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Markets
+\end_layout
+
+\begin_layout Plain Layout
+    & 150 & 150 & 150 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+bottomrule
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{tabular*}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+medskip
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{minipage}{
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+footnotesize
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+textit{Notes:}
+\end_layout
+
+\begin_layout Plain Layout
+Standard errors clustered by car model code
+\end_layout
+
+\begin_layout Plain Layout
+(285 clusters) are in parentheses.
+\end_layout
+
+\begin_layout Plain Layout
+Prices are measured relative to average income and enter
+\end_layout
+
+\begin_layout Plain Layout
+utility in levels.
+\end_layout
+
+\begin_layout Plain Layout
+IV and BLP use four rival-only quadratic differentiation
+\end_layout
+
+\begin_layout Plain Layout
+instruments constructed from weight,
+ fuel consumption,
+\end_layout
+
+\begin_layout Plain Layout
+power and size.
+\end_layout
+
+\begin_layout Plain Layout
+BLP is estimated by two-step GMM with clustered weighting
+\end_layout
+
+\begin_layout Plain Layout
+and 40-point Gaussian quadrature.
+\end_layout
+
+\begin_layout Plain Layout
+Its price sensitivity satisfies
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+alpha_i=
+\backslash
+exp(
+\backslash
+mu+
+\backslash
+sigma
+\backslash
+nu_i)$,
+\end_layout
+
+\begin_layout Plain Layout
+where $
+\backslash
+nu_i
+\backslash
+sim N(0,1)$.
+\end_layout
+
+\begin_layout Plain Layout
+Mean price sensitivity is
+\end_layout
+
+\begin_layout Plain Layout
+$
+\backslash
+alpha$ for the homogeneous logit models and
+\end_layout
+
+\begin_layout Plain Layout
+$E[
+\backslash
+alpha_i]=
+\backslash
+exp(
+\backslash
+mu+
+\backslash
+sigma^2/2)$ for BLP.
+\end_layout
+
+\begin_layout Plain Layout
+The standard error of the BLP mean is calculated
+\end_layout
+
+\begin_layout Plain Layout
+using the delta method.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{minipage}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{table}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Merger analysis
+\end_layout
+
+\begin_layout Subsubsection
+Merger simulation procedure
+\end_layout
+
+\begin_layout Standard
+A given firm / car manufacturer 
+\begin_inset Formula $f$
+\end_inset
+
+ in market 
+\begin_inset Formula $t$
+\end_inset
+
+ with product portfolio 
+\begin_inset Formula $\mathcal{J}_{ft}$
+\end_inset
+
+ maximises 
+\begin_inset Formula $\sum_{k\in\mathcal{J}_{ft}}M_{t}(p_{kt}-c_{kt})s_{kt}(\mathbf{p}_{t})$
+\end_inset
+
+ yielding first order conditions 
+\begin_inset Formula $s_{jt}(\mathbf{p}_{t})=-\sum_{k\in\mathcal{J}_{f}}(p_{kt}-c_{kt})\frac{\partial s_{kt}}{\partial p_{jt}},$
+\end_inset
+
+ for all products 
+\begin_inset Formula $j\in\mathcal{J}_{ft}$
+\end_inset
+
+.
+ Stacking the FOCs for all firms:
+\begin_inset Formula 
+\begin{equation}
+\underbrace{\begin{bmatrix}s_{1t}(\mathbf{p}^{*}_{t})\\
+s_{2t}(\mathbf{p}^{*}_{t})\\
+\vdots\\
+s_{Jt}(\mathbf{p}^{*}_{t})
+\end{bmatrix}}_{\equiv\mathbf{s}_{t}(\mathbf{p}^{*}_{t})}=-\mathcal{H}\odot\underbrace{\begin{bmatrix}\frac{\partial s_{1t}(\mathbf{p}^{*}_{t})}{\partial p_{1t}} & \frac{\partial s_{2t}(\mathbf{p}^{*}_{t})}{\partial p_{1t}} & \cdots & \frac{\partial s_{Jt}(\mathbf{p}^{*}_{t})}{\partial p_{1t}}\\
+\frac{\partial s_{1t}(\mathbf{p}^{*}_{t})}{\partial p_{2t}} & \frac{\partial s_{2t}(\mathbf{p}^{*}_{t})}{\partial p_{2t}} & \cdots & \frac{\partial s_{Jt}(\mathbf{p}^{*}_{t})}{\partial p_{2t}}\\
+\vdots & \vdots & \ddots & \vdots\\
+\frac{\partial s_{1t}(\mathbf{p}^{*}_{t})}{\partial p_{Jt}} & \frac{\partial s_{2t}(\mathbf{p}^{*}_{t})}{\partial p_{Jt}} & \cdots & \frac{\partial s_{Jt}(\mathbf{p}^{*}_{t})}{\partial p_{Jt}}
+\end{bmatrix}}_{\equiv\nabla\mathbf{s}_{t}(\mathbf{p}^{*}_{t})}\underbrace{\left(\begin{bmatrix}p^{*}_{1t}\\
+p^{*}_{2t}\\
+\vdots\\
+p^{*}_{Jt}
+\end{bmatrix}-\begin{bmatrix}c_{1t}\\
+c_{2t}\\
+\vdots\\
+c_{Jt}
+\end{bmatrix}\right)}_{=\mathbf{p}^{*}_{t}-\mathbf{c}_{t}},\label{eq:firm_opt_fixedpoint}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathcal{H}$
+\end_inset
+
+ is the ownership matrix defined by 
+\begin_inset Formula $\mathcal{H}_{jk}=1,$
+\end_inset
+
+ if product 
+\begin_inset Formula $j$
+\end_inset
+
+ and 
+\begin_inset Formula $k$
+\end_inset
+
+ are owned by the same firm and 
+\begin_inset Formula $\mathcal{H}_{jk}=0$
+\end_inset
+
+ if not.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:firm_opt_fixedpoint}
+\end_layout
+
+\end_inset
+
+ is a fixed point relationship that holds in the Bertrand Nash equilibrium (i.e.
+ where firms compete on price and all optimise to choose 
+\begin_inset Formula $\mathbf{p}^{*}$
+\end_inset
+
+ given these exact prices)
+\end_layout
+
+\begin_layout Standard
+From 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:firm_opt_fixedpoint}
+\end_layout
+
+\end_inset
+
+ one can back out marginal costs from observed data:
+\begin_inset Formula 
+\[
+\mathbf{c}_{t}=\mathbf{p}^{*}_{t}+\left(\mathcal{H}\odot\nabla s_{jt}(\mathbf{p}^{*}_{t})\right)^{-1}s_{jt}(\mathbf{p}^{*}_{t}).
+\]
+
+\end_inset
+
+Note that this relies completely on the assumed model and competition structure above.
+ To simulate the merger between VW and Fiat we use these derived costs together with a new ownership structure 
+\begin_inset Formula $\mathcal{H}'$
+\end_inset
+
+ to determine a new fixed point 
+\begin_inset Formula $\mathbf{p}_{t}'$
+\end_inset
+
+ using the structure in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:firm_opt_fixedpoint}
+\end_layout
+
+\end_inset
+
+ (i use the Morrow-Skerlos
+\series bold
+ 
+\series default
+contraction)
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+NÆVN AT DENNE FUNGERE FOR BÅDE SIMPEL OG RANDOM EFFECTS.
+\end_layout
+
+\end_inset
+
+ Specifically we set 
+\begin_inset Formula $\mathcal{H}_{jk}=1$
+\end_inset
+
+ where 
+\begin_inset Formula $j$
+\end_inset
+
+ and 
+\begin_inset Formula $k$
+\end_inset
+
+ are both either owned by VW or Fiat.
+\end_layout
+
+\begin_layout Subsubsection
+Consumer surplus
+\end_layout
+
+\begin_layout Standard
+A legislators real interest is how a possible merger would effect consumers wellbeing.
+ Using the demand model we can calculate the expected change in consumer surplus before and after the merger as
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+Let utility be given by
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(u_{ijt}^{s}=
+\backslash
+delta_{jt}^{s}+
+\backslash
+mu_{ijt}^{s}+
+\backslash
+varepsilon_{ijt}
+\backslash
+),
+\end_layout
+
+\begin_layout Plain Layout
+where 
+\backslash
+(
+\backslash
+delta_{jt}^{s}
+\backslash
+) denotes mean utility and
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\backslash
+mu_{ijt}^{s}
+\backslash
+) captures consumer-specific deviations from mean utility.
+\end_layout
+
+\begin_layout Plain Layout
+The change in expected consumer surplus is
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+begin{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+Delta CS_{it}
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{1}{
+\backslash
+alpha_i}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{E}_{
+\backslash
+varepsilon}
+\backslash
+!
+\backslash
+left[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+max_{j
+\backslash
+in
+\backslash
+{0,
+\backslash
+ldots,J
+\backslash
+}}u_{ijt}^{
+\backslash
+mathrm{post}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right]
+\end_layout
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+mathbb{E}_{
+\backslash
+varepsilon}
+\backslash
+!
+\backslash
+left[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+max_{j
+\backslash
+in
+\backslash
+{0,
+\backslash
+ldots,J
+\backslash
+}}u_{ijt}^{
+\backslash
+mathrm{pre}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right]
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right] 
+\backslash
+
+\backslash
+[4pt]
+\end_layout
+
+\begin_layout Plain Layout
+&=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{1}{
+\backslash
+alpha_i}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+left[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+ln
+\backslash
+!
+\backslash
+left(
+\end_layout
+
+\begin_layout Plain Layout
+1+
+\backslash
+sum_{j=1}^{J}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+exp
+\backslash
+!
+\backslash
+left(
+\backslash
+delta_{jt}^{
+\backslash
+mathrm{post}}+
+\backslash
+mu_{ijt}^{
+\backslash
+mathrm{post}}
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+ln
+\backslash
+!
+\backslash
+left(
+\end_layout
+
+\begin_layout Plain Layout
+1+
+\backslash
+sum_{j=1}^{J}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+exp
+\backslash
+!
+\backslash
+left(
+\backslash
+delta_{jt}^{
+\backslash
+mathrm{pre}}+
+\backslash
+mu_{ijt}^{
+\backslash
+mathrm{pre}}
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right)
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+right].
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+end{aligned}
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+Here,
+ 
+\backslash
+(
+\backslash
+alpha_i>0
+\backslash
+) denotes consumer 
+\backslash
+(i
+\backslash
+)'s price sensitivity,
+\end_layout
+
+\begin_layout Plain Layout
+with utility linear in price through the term 
+\backslash
+(-
+\backslash
+alpha_i p_{jt}
+\backslash
+).
+\end_layout
+
+\begin_layout Plain Layout
+The expression assumes independent,
+ standard type-I extreme-value
+\end_layout
+
+\begin_layout Plain Layout
+errors and normalizes the outside option's systematic utility to zero.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+In the random-coefficients logit model,
+ 
+\backslash
+(
+\backslash
+mu_{ijt}^{s}
+\backslash
+) captures
+\end_layout
+
+\begin_layout Plain Layout
+heterogeneity in preferences,
+ and 
+\backslash
+(
+\backslash
+alpha_i
+\backslash
+) may also vary across
+\end_layout
+
+\begin_layout Plain Layout
+consumers.
+ The average change in consumer surplus is obtained by
+\end_layout
+
+\begin_layout Plain Layout
+integrating over the distribution of consumer preferences:
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+Delta 
+\backslash
+overline{CS}_{t}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+int 
+\backslash
+Delta CS_{it}
+\backslash
+,dF(i).
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+The simple logit model is the special case in which
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+(
+\backslash
+mu_{ijt}^{s}=0
+\backslash
+) and 
+\backslash
+(
+\backslash
+alpha_i=
+\backslash
+alpha
+\backslash
+) for all consumers.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Theoretical part
+\end_layout
+
+\begin_layout Subsection
+Price dispersion for homogeneous goods
+\end_layout
+
+\begin_layout Standard
+The classic price-dispersion models considered can all be slightly augmentet to explain qualitative pattern of 
+\emph on
+home bias
+\emph default
+.
+ For example search models with homogeneous goods,
+ where we exogenously set the information cost to favor home goods in some way.
+\end_layout
+
+\begin_layout Standard
+Take for example Diamond (1971),
+ where a unit continuum of consumers value the homogeneous good at 
+\begin_inset Formula $v>c$
+\end_inset
+
+,
+ where 
+\begin_inset Formula $c$
+\end_inset
+
+ is the firms constant marginal cost.
+ Consumers first search at a randomly selected firm at zero cost.
+ Then they choose weather or not to search another random firm inducing a search cost 
+\begin_inset Formula $s>0$
+\end_inset
+
+.
+ The unique symmetric pure strategy Nash Equilibrium (PSNE) is that firms choose monopoly prices 
+\begin_inset Formula $p^{*}=v$
+\end_inset
+
+ and consumers only search the first firm assigned to them.
+ Intuitively all other potentiel equilibria with 
+\begin_inset Formula $p^{*}<v$
+\end_inset
+
+ incentivises a firm deviation of 
+\begin_inset Formula $p'=\min\{p^{*}+s-\epsilon,v\}$
+\end_inset
+
+,
+ where 
+\begin_inset Formula $\epsilon\geq0$
+\end_inset
+
+.
+ To see this let a costumer 
+\begin_inset Formula $i$
+\end_inset
+
+ search the deviating firm with price 
+\begin_inset Formula $p'$
+\end_inset
+
+ at zero cost.
+ Then they can either buy this good at cost 
+\begin_inset Formula $p^{*}+s-\epsilon$
+\end_inset
+
+ or search and buy a non-deviating firms good a price 
+\begin_inset Formula $p^{*}+s$
+\end_inset
+
+.
+ Since goods are homogenous they stricly (weakly) prefer 
+\begin_inset Formula $p'$
+\end_inset
+
+ to 
+\begin_inset Formula $p^{*}$
+\end_inset
+
+ when 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ (
+\begin_inset Formula $\epsilon=0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Consider Diamond (1971) slightly augmented so the initial zero-cost search is drawn from a distribution that assigns greater probability to domestic firms while remaining uniform within the domestic and foreign groups.
+ If no domestic firms are available,
+ the assignment is uniform across all firms.
+ This would induce an equilibrium with home bias as observed in the data.
+\end_layout
+
+\begin_layout Standard
+Note that Diamond (1971) is essentailly Burdetr and Judd with search cost 
+\begin_inset Formula $s=0$
+\end_inset
+
+.
+ The above discussion would therefore also hold.
+ Much the same analysis could probably be done for models without search like Varian (1980) - by exogenously biasing the uninformed / loyal customers towards home production - or Butters (1977) - by setting advertisment costs to be lower for firms in their home country.
+\end_layout
+
+\begin_layout Subsection
+Perloff-Salop and Logit
+\end_layout
+
+\begin_layout Standard
+In the Perloff-Salop model consumers has utility given by
+\begin_inset Formula 
+\begin{equation}
+u_{ij}=\epsilon_{ij}-p_{j},\label{eq:ps}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\epsilon_{ij}\sim F$
+\end_inset
+
+ is independent and identically distributed stochastic match values interpreted as how well product 
+\begin_inset Formula $j$
+\end_inset
+
+ fits consumer 
+\begin_inset Formula $i$
+\end_inset
+
+'s preferences.
+ 
+\end_layout
+
+\begin_layout Standard
+The distribution 
+\begin_inset Formula $F$
+\end_inset
+
+ is arbitrary - and crucially for this discussion - does not depend on observable characteristics of 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Therefor the only source of product differentiation is price 
+\begin_inset Formula $p_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Looking back at the simple logit we see that utility does depend on 
+\begin_inset Formula $j$
+\end_inset
+
+'s characteristics through 
+\begin_inset Formula $\mathbf{x}^{\top}_{jt}\boldsymbol{\beta}$
+\end_inset
+
+.
+ This is the main difference,
+ however in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:sl}
+\end_layout
+
+\end_inset
+
+ the match value distribution is chosen as the type one extreme value distribution (with offset 
+\begin_inset Formula $0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Testing the Perloff-Salop model 
+\end_layout
+
+\begin_layout Standard
+The distribution 
+\begin_inset Formula $F$
+\end_inset
+
+ in the Perloff-Salop model is by no means irrelevant (as I will show in section 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+ref{sec:manycarmanu}
+\end_layout
+
+\end_inset
+
+) and therefore whenever empirical models on the form 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:ps}
+\end_layout
+
+\end_inset
+
+ are tested the distributional choice of 
+\begin_inset Formula $T1EV(0)$
+\end_inset
+
+ is a part of the joint hypothesis.
+\end_layout
+
+\begin_layout Standard
+In addition to this (as always) exogeneity of the regressors must hold which cannot be tested.
+ 
+\end_layout
+
+\begin_layout Standard
+Having this in mind we test the following null hypothesis
+\begin_inset Formula 
+\[
+\mathcal{H}_{0}:\boldsymbol{\beta}=\mathbf{0},\qquad\mathcal{H}_{A}:\exists\beta_{k}\in\boldsymbol{\beta}:\beta_{k}\neq0.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rejecting it would imply that observable characteristics 
+\emph on
+have 
+\emph default
+an effect on utility and thus contradicting 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:ps}
+\end_layout
+
+\end_inset
+
+.
+ Estimating the regression model 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{eq:reg_sl}
+\end_layout
+
+\end_inset
+
+ and testing using an F-test yields a 
+\begin_inset Formula $p$
+\end_inset
+
+-value of 
+\begin_inset Formula $0.000$
+\end_inset
+
+ thus we firmly reject the null hypothesis and the utility assumption of the Perloff-Salop model.
+ 
+\end_layout
+
+\begin_layout Subsection
+Many car-manufactures
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+label{sec:manycarmanu}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using the result by Gabaix,
+ Laibson and Resnick (2016) markups in the Perloff and Salop model have the assymptotic property (i.e.
+ firms in the markets 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{equation}
+p^{*}-c\propto\frac{1}{nf\left[F^{-1}(1-\frac{1}{n})\right]},\label{GLR}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the i.i.d.
+ taste shocks are distributed according to 
+\begin_inset Formula $f$
+\end_inset
+
+ (i.e.
+ 
+\begin_inset Formula $\epsilon_{i}\sim f$
+\end_inset
+
+) and 
+\begin_inset Formula $F$
+\end_inset
+
+ is the cdf.
+ of this distribution.
+ Inserting the two distributions respectively and letting 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+ informs us on what happens to the markup when there are 
+\emph on
+many
+\emph default
+ (formally infinitely) car manufactures.
+\end_layout
+
+\begin_layout Subsubsection
+Gumbel / T1EV(0) shocks
+\end_layout
+
+\begin_layout Standard
+Here I restate the distribution for clarity
+\begin_inset Formula 
+\[
+F(x)=\exp\left\{ -\exp\{-x\}\right\} ,\qquad f(x)=\exp\left\{ -x\right\} F(x)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inserting into the denominator of 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{GLR}
+\end_layout
+
+\end_inset
+
+ yields
+\begin_inset Formula 
+\begin{align*}
+nf\left[F^{-1}(1-\frac{1}{n})\right] & =n\exp\left\{ -F^{-1}(1-\frac{1}{n})\right\} F\left[F^{-1}(1-\frac{1}{n})\right]\\
+ & =n\exp\left\{ \log\left(-\log\left(1-\frac{1}{n}\right)\right)\right\} \left(1-\frac{1}{n}\right)\\
+ & =-n\log\left(1-\frac{1}{n}\right)\left(1-\frac{1}{n}\right)\\
+ & =-\log\left[\left(1-\frac{1}{n}\right)^{n}\right]\left(1-\frac{1}{n}\right)
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+taking the limit of this while using the product rule of limits and that 
+\begin_inset Formula $\lim_{n\rightarrow\infty}\left(1-\frac{1}{n}\right)^{n}=\exp\{-1\}$
+\end_inset
+
+ finally yields
+\begin_inset Formula 
+\[
+\lim_{n\rightarrow\infty}\left\{ -\log\left[\left(1-\frac{1}{n}\right)^{n}\right]\left(1-\frac{1}{n}\right)\right\} =-\log\left(\exp\{-1\}\right)\cdot1=1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is,
+ the markup under when taste shocks follow a 
+\begin_inset Formula $T1EV(0)$
+\end_inset
+
+ distribution then increasing the number of firms indefinitely does not remove the markups.
+\end_layout
+
+\begin_layout Subsubsection
+Gaussian shocks
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+For standard Gaussian shocks,
+ let $F=
+\backslash
+Phi$ and $f=
+\backslash
+phi$,
+ where
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+phi(x)=
+\backslash
+frac{1}{
+\backslash
+sqrt{2
+\backslash
+pi}}
+\backslash
+exp
+\backslash
+left
+\backslash
+{-
+\backslash
+frac{x^2}{2}
+\backslash
+right
+\backslash
+}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Writing $z_n=
+\backslash
+Phi^{-1}(1-1/n)$,
+ we have
+\end_layout
+
+\begin_layout Plain Layout
+$1-
+\backslash
+Phi(z_n)=1/n$.
+ The reciprocal of the denominator in
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+eqref{GLR} is therefore
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+frac{1}{n
+\backslash
+phi(z_n)}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\backslash
+frac{1-
+\backslash
+Phi(z_n)}{
+\backslash
+phi(z_n)}.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+As $n
+\backslash
+rightarrow
+\backslash
+infty$,
+ $z_n
+\backslash
+rightarrow
+\backslash
+infty$.
+\end_layout
+
+\begin_layout Plain Layout
+Using L'Hôpital's rule and $
+\backslash
+phi'(z)=-z
+\backslash
+phi(z)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lim_{z
+\backslash
+rightarrow
+\backslash
+infty}
+\backslash
+frac{1-
+\backslash
+Phi(z)}{
+\backslash
+phi(z)}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lim_{z
+\backslash
+rightarrow
+\backslash
+infty}
+\backslash
+frac{-
+\backslash
+phi(z)}{-z
+\backslash
+phi(z)}
+\end_layout
+
+\begin_layout Plain Layout
+=
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+lim_{z
+\backslash
+rightarrow
+\backslash
+infty}
+\backslash
+frac{1}{z}=0.
+\end_layout
+
+\begin_layout Plain Layout
+
+\backslash
+]
+\end_layout
+
+\begin_layout Plain Layout
+Thus,
+ unlike under Gumbel shocks,
+ increasing the number of
+\end_layout
+
+\begin_layout Plain Layout
+firms indefinitely eliminates markups and prices converge to marginal cost.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Implications for empirical estimates
+\end_layout
+
+\begin_layout Standard
+The above results highlight that the assumption of taste shocks distribution is by no means innocent in a Perloff Salop model.
+ This hints at a more general insight.
+ The assumptions made to derive the logit model (for example the T1EV assumption on taste shocks) are not innocent and can be themselves cause certain regularities of the models.
+ These regularities or outcomes are 
+\emph on
+not
+\emph default
+ findings but assumptions and should be stated as such.
+ 
+\end_layout
+
+\begin_layout Standard
+Another example of this could be the choice of random variables in a random coefficients model:
+ by choosing random coefficients on non-price features we mechanically make the demand less price sensitive and thus increase the estimated markups.
+ Whereas letting the price coefficient be random does not imply this mechanically.
+ Here we again see that the modelling descisions 
+\emph on
+before estimation
+\emph default
+ partly determines the results.
+\end_layout
+
+\end_body
+\end_document
