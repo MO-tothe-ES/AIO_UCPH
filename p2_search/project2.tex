@@ -1,0 +1,256 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{mathpazo,microtype}
+\usepackage{graphicx,booktabs,tabularx,array,setspace,caption,float}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Consumer Search on Expedia},pdfauthor={Casper Moes}}
+\onehalfspacing
+\raggedbottom
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{2em}
+\setlength{\intextsep}{8pt}
+\captionsetup{font=small,labelfont=bf,skip=4pt}
+\captionsetup[table]{position=above}
+\newcommand{\subhead}[1]{\par\smallskip\noindent\textbf{#1}\par\nobreak\smallskip}
+\newcommand{\mainhead}[1]{\par\medskip\noindent\textbf{#1}\par\nobreak\smallskip}
+\graphicspath{{../simple/}}
+
+\begin{document}
+{\setstretch{1}
+\raggedright
+{\small Advanced Industrial Organisation \enspace/\enspace Project 2\par}
+\vspace{0.5em}
+{\LARGE\bfseries Consumer Search on Expedia\par}
+\vspace{0.45em}
+{\small Casper Moes\par}
+\vspace{0.85em}
+}
+
+\mainhead{1. Data}
+The data cover 399,344 search sessions, each a single search on Expedia. A listing is a hotel in the results, whether or not the user saw it or clicked it. We observe clicks and bookings for all 9,917,530 listings. Expedia showed its usual ranking in 277,798 sessions and a random order in 121,546. These are the two ranking groups. Each recorded session has at least one click. Expedia's group includes a disproportionate share of sessions that ended in a booking, so comparing booking rates does not isolate the effect of ranking.
+
+\subhead{1.1(a) Position and price}
+Figure~1 shows that geometric mean prices fall down the page in both groups. We compute these means by averaging log prices and converting them back to dollars. This limits the influence of extreme prices and excludes 54 zero prices. Since the mix of sessions changes by position, we also compare hotels relative to their own session's mean. One slot down is associated with $-0.20\%$ under Expedia and $-0.01\%$ under random ranking. The randomized profile is nearly flat. Expedia places slightly pricier hotels near the top, possibly because of quality or relevance.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.98\linewidth]{price_profiles.pdf}
+\caption{Displayed prices by position for positive-price listings. The right panel compares each price with its session geometric mean.}
+\end{figure}
+
+\newpage
+\subhead{1.1(b) Purchase conditional on a click}
+Conversion is the share of clicked listings that end in a booking. It falls from 88.49\% to 77.57\% under Expedia and from 13.21\% to 9.21\% under random ranking between the first and last bands (Figure~2). The bands smooth sparse positions 5, 11, 17 and 23, reserved for opaque offers that hide the hotel's name until booking (Ursu, 2018).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.98\linewidth]{conversion_bands.pdf}
+\caption{Booking conditional on a click. The right panel sets each ranking’s conversion rate in positions 1--5 to 100.}
+\end{figure}
+
+\mainhead{2. Theory}
+\subhead{2.1 Prices and search order}
+Arbatskaya (2007) predicts falling prices across active firms. The product is homogeneous, so consumers search further if expected savings cover search costs. Consumers with high search costs stop sooner and pay more. Zhou (2011) finds rising prices for differentiated products. Early firms compete with unexplored options, while customers reaching late firms have rejected earlier offers. The Expedia gradient has Arbatskaya's sign and the opposite sign to Zhou's. Displayed order and search order can differ.
+
+\subhead{2.2 Why consumers buy after a visit}
+In Arbatskaya's model a consumer stops if the next expected saving is below their search cost, so later firms attract low-cost searchers. In Zhou's model buying also depends on the match value (how well the product suits the buyer), the best earlier offer, the option to buy nothing and the remaining offers. Consumers can return to earlier firms for free. Expedia shows prices before the click, and its conversion profiles alone cannot distinguish the two mechanisms.
+
+\newpage
+\subhead{2.3 Comparing the two conversion profiles}
+Expedia's decline is larger in percentage points, while the random profile falls more relative to its starting level (30\% versus 12\%). Expedia may place better expected matches near the top. The comparison also reflects which hotels users click and which sessions enter each sample, particularly the oversampling of bookings.
+
+\subhead{2.4 Two firms with a free first visit}
+\textbf{(i) Search.} Let $x=\tilde p_1$ and $y=\tilde p_2$ be actual prices and $p_1,p_2$ expected prices. Match values $u_1,u_2$ are independent uniforms on $[0,1]$. Buying nothing pays zero, and consumers can return for free. Visit Firm~1 first because the visit is free. With payoff $v=\max\{0,u_1-x\}$ in hand, the expected gain from inspecting Firm~2 is $\mathbb{E}[\max\{u_2-p_2-v,0\}]$. At the break-even payoff $z=a-p_2$, the gain equals the cost $s$.
+\[
+s=\int_a^1 (u-a)\,du=\tfrac12(1-a)^2,\qquad
+a=1-\sqrt{2s},\qquad z=a-p_2.
+\]
+Search Firm~2 if $v<z$. Otherwise stop and buy from Firm~1 if its payoff is positive. If $z\leq0$, no second visit is worthwhile. After both visits choose the highest of $u_1-x$, $u_2-y$ and zero. The first visit reveals $x$, so its expected price $p_1$ drops out of the stopping rule.
+
+\textbf{(ii) Profits.} Normalize the consumer mass to one. Around the interior equilibrium, $z>0$, $x+z<1$ and $y+z<1$. Firm~1 sells immediately to mass $1-x-z$ and also sells to consumers who search again and return. Firm~2 can sell both to consumers with a negative first payoff and to those with a positive payoff below $z$. With zero production costs, $\pi_1=xD_1$ and $\pi_2=yD_2$, where
+\begin{align*}
+D_1 &= 1-x-z+\int_0^z(y+v)\,dv = 1-x-z+yz+\tfrac12 z^2,\\
+D_2 &= x(1-y)+\int_0^z(1-y-v)\,dv = (x+z)(1-y)-\tfrac12 z^2.
+\end{align*}
+If $z\leq0$, Firm~2 receives no visits and Firm~1 sells to those with $u_1>x$. For larger price deviations, use the uniform CDF bounded between zero and one.
+
+\textbf{(iii) First-order conditions.} When taking each firm's price derivative, keep $z$ fixed because the deviation is hidden until the visit. Then set actual prices equal to expected prices and use $z=a-p_2$. The conditions are
+\begin{align}
+  1-2p_1-z+p_2z+\tfrac12 z^2 &= 0,\\
+  (p_1+z)(1-2p_2)-\tfrac12 z^2 &= 0.
+\end{align}
+These interior conditions agree with Armstrong (2017).
+
+\newpage
+\textbf{(iv) Numerical prices.} Firm~1 charges less at every reported cost (Figure~3 and Table~1). At $s=0.05$, the prices are 0.45869 and 0.48497. Both prices rise with $s$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.63\linewidth]{equilibrium_prices.pdf}
+\caption{Equilibrium prices as the cost of the second visit rises. Firm~1 is free to visit.}
+\end{figure}
+
+\subhead{2.5 A platform that puts the cheaper firm first}
+\textbf{(i) Incentive to change rank.} Firm~2 can move first by setting $q\leq p_1$. If Firm~1 keeps charging $p_1$, the old equilibrium requires
+\[
+\pi_2 \ \geq\ \sup_{0\leq q\leq p_1} qD_1(q,p_1;a-p_1).
+\]
+Here $D_1$ is demand for the firm visited first. Firm~1 also has to prefer its current profit to a deviation that moves it second. Firm~2 can match $p_1$ and move first under the tie rule. Its switching profit is $p_1[1-a+(a^2-p_1^2)/2]$. At $s=0.05$ profit rises from 0.15464 to 0.20403. The fixed-order prices fail this constraint at every reported cost.
+
+\begin{table}[H]
+\centering
+\caption{Fixed-order prices and Firm~2's profit if it matches Firm~1 to move first.}
+\small
+\begin{tabular}{rrrrr}
+\toprule
+Search cost $s$ & Price $p_1$ & Price $p_2$ & Original profit & Switching profit\\
+\midrule
+0.001 & 0.41816 & 0.42610 & 0.17200 & 0.17294\\
+0.010 & 0.42944 & 0.45024 & 0.16983 & 0.17942\\
+0.025 & 0.44184 & 0.46837 & 0.16450 & 0.18884\\
+0.050 & 0.45869 & 0.48497 & 0.15464 & 0.20403\\
+0.075 & 0.47351 & 0.49406 & 0.14454 & 0.21918\\
+0.100 & 0.48716 & 0.49865 & 0.13459 & 0.23449\\
+0.120 & 0.49749 & 0.49995 & 0.12688 & 0.24688\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{(ii) Pricing and consumers.} The reward for a price cut is a free first visit. Firms may mix over prices if a predictable price invites undercutting. We expect stronger price competition to help consumers. The overall effect depends on how price changes affect search and matches.
+
+\mainhead{3. Empirical analysis}
+\subhead{3.1 Demand and search}
+We keep every listing and set 32,869 prices outside USD~10--1,000 to the nearest endpoint, using the range in Ursu (2018).
+
+\textbf{Baseline.} In session $i$, hotel $j$ has utility $u_{ij}=\delta_{ij}+\varepsilon_{ij}$. The consumer knows $\delta_{ij}$ up front and learns the match value $\varepsilon_{ij}$ by clicking. A higher search-cost shifter $\mu_{ij}$ makes clicking more costly. In Moraga-González et al. (2023), booking depends on the net index $v_{ij}=\delta_{ij}-\mu_{ij}$. The outside option ($j=0$) is leaving without booking on Expedia. The booking and outside-option probabilities are
+\[
+ s_{ij}=\frac{e^{v_{ij}}}{1+\sum_{k\geq1}e^{v_{ik}}},\qquad
+ s_{i0}=\frac{1}{1+\sum_{k\geq1}e^{v_{ik}}}.
+\]
+We fit $v_{ij}=x_{ij}'\theta$ by maximizing $\sum_i\log s_{i,d_i}$, where $d_i$ is the observed choice and $x_{ij}$ contains the controls. Search is free in the baseline ($\mu_{ij}=0$). Both ranking groups share hotel coefficients. Expedia gets its own intercept (the common shift in hotel appeal relative to leaving) and position slope (the effect of moving one slot down).
+
+\textbf{Controls.} Following Ursu (2018), we use price in USD~100, stars, guest reviews, Expedia's first location score and whether a promotion was shown. For stars and reviews, we flag missing or zero scores and fill them with the median among positive scores.
+
+\textbf{Search extension.} Let $g$ identify the ranking group (randomized or Expedia) and $\ell_{ij}$ the displayed position, with 1 at the top. Set $\mu_{ij}=\gamma_{0g}+\gamma_{1g}\ell_{ij}$, with a nonnegative intercept and increase per slot. For each candidate cost, keep the fitted $v_{ij}$ fixed and recover $\delta_{ij}=v_{ij}+\mu_{ij}$. This leaves booking probabilities unchanged. Price and hotel attributes enter utility, while position can affect utility and search costs.
+
+The reservation value $r_{ij}$ is the fallback utility at which the expected gain from clicking equals its cost. The Weitzman index is $w_{ij}=\min\{r_{ij},u_{ij}\}$, with $w_{i0}=u_{i0}$. The consumer clicks $j$ if $r_{ij}\geq W_{i,-j}$, where $W_{i,-j}=\max_{k\ne j} w_{ik}$ includes the outside option. The lecture notes give the click probability as
+\[
+ q_{ij}=\mathbb E_{\varepsilon\sim F_0}\!\left[\frac{1-F_0(\varepsilon+b_{i,-j}-\delta_{ij}+\mu_{ij})}{1-F_0(\varepsilon+b_{i,-j}-\delta_{ij})}\right],
+ \qquad b_{i,-j}=\log\!\left(1+\sum_{k\ne 0,j}e^{v_{ik}}\right).
+\]
+Here $F_0(z)=\exp(-e^{-z})$ is the standard Gumbel distribution function and $b_{i,-j}$ summarizes the appeal of the other options. At fixed $v_{ij}$, higher $\mu_{ij}$ reduces clicks. In each group we minimize $\sum_\ell n_{g\ell}(\bar a_{g\ell}-\bar q_{g\ell})^2$, where the bars give observed and fitted clicks per listing at position $\ell$ and $n_{g\ell}$ counts those listings. Missing zero-click sessions can affect estimated costs.
+
+\newpage
+Under random ranking, one slot down changes utility by $-0.001$ and the search-cost shifter by 0.077, for a net effect of $-0.078$ (Table~2). The model matches booking rates of 13.04\% under random ranking and 93.86\% under Expedia. It predicts 1.08 clicks per randomized session versus 1.13 observed and 24.19 under free search (Figure~4).
+
+\begin{table}[H]
+\centering
+\caption{Full-sample estimates. The two search extension columns show the utility and cost components of one model. Expedia rows show differences from the randomized group. Dashes mark variables that enter only utility.}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrr}
+\toprule
+ & & \multicolumn{2}{c}{Search extension}\\
+\cmidrule(lr){3-4}
+Variable & Baseline net index & Recovered utility & Isolated search cost\\
+\midrule
+Price (USD~100) & $-0.782$ & $-0.782$ & ---\\
+Stars & 0.299 & 0.299 & ---\\
+No star rating & $-0.378$ & $-0.378$ & ---\\
+Review score & 0.249 & 0.249 & ---\\
+No review score & $-0.540$ & $-0.540$ & ---\\
+Location score 1 & 0.060 & 0.060 & ---\\
+Promotion & 0.090 & 0.090 & ---\\
+Position (randomized) & $-0.078$ & $-0.001$ & 0.077\\
+Expedia $\times$ position & $-0.027$ & 0.655 & 0.682\\
+Expedia intercept shift & 4.942 & 4.017 & $-0.925$\\
+Intercept (randomized) & $-5.085$ & $-2.917$ & 2.168\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.98\linewidth]{click_curve_fit.pdf}
+\caption{Observed and fitted clicks by position. The fit uses all slots, weighted by listing count, and smooths over the dips at positions reserved for opaque offers.}
+\end{figure}
+
+\textbf{Value of moving up and implied markup.} A hotel that moves up one slot can raise price by $100\theta_{\rm pos}/\theta_{\rm price}$ dollars and keep its booking probability fixed. The randomized slope gives USD~10.03. For a firm with one hotel, the implied markup (price minus marginal cost) is $100/[-\theta_{\rm price}(1-s_{ij})]$. These formulas apply inside the clipping range, where the price slope is active. The median markup is USD~128, and the median markup-to-price ratio is 101\%. Without a price instrument, unobserved quality may raise both price and demand, making demand look less price-sensitive.
+
+\newpage
+\subhead{3.2 What happens when Expedia reorders the list?}
+Following Ursu (2018), we take 1,000 Expedia lists sampled across all destinations and compare three rankings. We use the original order, a random shuffle across its slots and an order based on estimated utility before assigning positions. We apply the randomized group's intercept, position slope and search costs throughout to avoid carrying over Expedia's oversampled booking level. Keeping prices and hotels fixed isolates the immediate effect. Hotels may adjust prices after a persistent ranking change.
+
+\textbf{Bookings.} Both models use the same net index and predict the same bookings. Relative to Expedia, random ordering lowers predicted bookings by 0.57 percentage points. Utility-based ordering raises them by 1.66 points (Table~3 and Figure~5). The utility rule puts the most appealing hotels where the estimated position penalty is smallest.
+
+\textbf{Clicks.} The free-search baseline predicts 24.66 clicks per session in every order, equal to the average list length. The extension predicts 1.10 clicks per session under Expedia. Random ordering lowers clicks by 0.28 per 100 sessions. Utility-based ordering raises them by 0.82 per 100 sessions.
+
+\begin{table}[H]
+\centering
+\caption{Predictions for 1,000 Expedia lists. Booking rates apply to both models. Booking changes are in percentage points.}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Ranking & Bookings (\%) & Change (pp) & Baseline clicks & Extension clicks\\
+\midrule
+Expedia & 14.37 & --- & 24.66 & 1.0997\\
+Random & 13.79 & $-0.57$ & 24.66 & 1.0968\\
+Utility-based & 16.02 & 1.66 & 24.66 & 1.1079\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.98\linewidth]{ranking_effects.pdf}
+\caption{Changes relative to the original Expedia ranking. The free-search baseline predicts no change in clicks.}
+\end{figure}
+
+\newpage
+\textbf{Robustness.} We check whether the ranking results depend on search costs rising with position. We fit a single cost shifter for all positions in the randomized group, so the full position effect enters utility. Random ordering lowers clicks by 0.34 instead of 0.28 per 100 sessions. Utility-based ordering raises them by 0.99 instead of 0.82 (Table~4). Both effects keep their sign and stay below one click per 100 sessions. The booking effects are identical because the net index is fixed.
+
+\begin{table}[H]
+\centering
+\caption{Robustness with a constant search-cost shifter across ranks. Changes are in clicks per 100 sessions.}
+\small
+\begin{tabular}{lrr}
+\toprule
+Ranking & Search extension & Constant search cost\\
+\midrule
+Random & $-0.28$ & $-0.34$\\
+Utility-based & 0.82 & 0.99\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Decisions that can move the ranking results.}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{.17\textwidth}*{3}{>{\raggedright\arraybackslash}X}@{}}
+\toprule
+Decision & What we chose & Main alternative & If assumption fails\\
+\midrule
+Sample & Both groups, separate position slopes & Randomized group only & Shared coefficients may differ\\
+Outside option & Separate booking intercepts & External booking rate & Booking levels shift\\
+Selection & Use recorded sessions & Account for zero-click sessions & Click levels may shift\\
+Utility and search & Price in utility, rank in both & Rank in utility only & Click effects change\\
+Position form & Linear displayed rank & Log rank & Top moves misvalued\\
+Price in demand & Observed hotel controls & Valid price instrument & Markups may be high\\
+Policy prices & Hold list and prices fixed & Allow price responses & Total effect changes\\
+Extreme prices & Clip to USD~10--1,000 & Keep raw prices & Price slope may shift\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subhead{References and AI use}
+Arbatskaya (2007), \href{https://doi.org/10.1111/j.1756-2171.2007.tb00047.x}{\emph{Ordered Search}}. Armstrong (2017), \href{https://doi.org/10.1093/jeea/jvx017}{\emph{Ordered Consumer Search}}. Zhou (2011), \href{https://doi.org/10.1016/j.ijindorg.2010.07.001}{\emph{Ordered Search in Differentiated Markets}}. Moraga-González, Sándor and Wildenbeest (2023), \href{https://doi.org/10.1093/restud/rdac047}{\emph{Consumer Search and Prices in the Automobile Market}}. Ursu (2018), \href{https://doi.org/10.1287/mksc.2017.1072}{\emph{The Power of Rankings}}. Munk-Nielsen (2026), \emph{Demand Estimation} and Lectures 6--7.
+
+ChatGPT (OpenAI, November 2026) assisted with derivations, Python code, checks and drafting. The accompanying notebook reproduces the analysis.
+
+
+\end{document}
